@@ -10,8 +10,11 @@ theme_set(
         )
 )
 
-long <- readxl::read_excel("Data/Carabidae_25.01.2023.xlsx", 
-                           sheet = "main_data") %>% 
+long <- dir("data", pattern = "xlsx") %>% 
+    sort(decreasing = TRUE) %>% 
+    `[`(1) %>% 
+    paste0("data/", .) %>% 
+    readxl::read_excel(sheet = "main_data") %>% 
     filter(taxa != "no_insects") %>% 
     select(-duration, -traps) %>% 
     arrange(desc(site), taxa) %>% # -taxa
