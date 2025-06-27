@@ -382,7 +382,9 @@ set.seed(1); res$permanova <- div %>%
 if(!export){res$permanova} 
 
 plots$f4_pcoa <- pc %>% 
+    ### axis 2 inversion
     mutate(Axis.2 = Axis.2 * -1) %>% 
+    ### axis 2 inversion
     ggplot(
         aes(x = Axis.1, y = Axis.2, linetype = year,
             fill = zone, color = zone, shape = year)) +
