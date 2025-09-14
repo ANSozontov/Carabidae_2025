@@ -393,12 +393,15 @@ if(!export){
 
 # PC corelation -----------------------------------------------------------
 sites <- readxl::read_excel("data/Carabidae_2025-09-05.xlsx", 
-                   "sites", skip = 1) %>% 
+                   "sites", skip = 2) %>% 
     mutate(
         site = as.numeric(str_extract(site, "[:digit:]+")),
         log_km = log10(км)
         ) %>% 
-    select(-zone) %>% 
+    select(-zone)
+
+
+way1 <- sites %>% 
     left_join(
         transmute(pc, year, zone, site = as.numeric(site), 
               plot = as.numeric(plot), Axis.1, Axis.2),
@@ -407,7 +410,7 @@ sites <- readxl::read_excel("data/Carabidae_2025-09-05.xlsx",
     select(-zone) %>% 
     unite("id", site, plot, sep = "_")
 
-cor.axis.1 <- sites %>% 
+cor.axis.1 <- way1 %>% 
     select(-Axis.2) %>% 
     pivot_longer(names_to = "param", values_to = "val", -1:-3) %>% 
     split(.$param) %>% 
@@ -429,7 +432,7 @@ cor.axis.1 <- sites %>%
         }) %>% 
     map_df(rbind, .id = "param")
     
-plots$cor.axis.1 <- sites %>% 
+plots$cor.axis.1 <- way1 %>% 
     select(-Axis.2) %>% 
     pivot_longer(names_to = "param", values_to = "val", -1:-3) %>% 
     ggplot(aes(val, Axis.1, color = year)) + 
@@ -444,7 +447,7 @@ plots$cor.axis.1 <- sites %>%
     theme(legend.position = "bottom") + 
     labs(x = NULL, y = NULL, subtitle = "Axis 1, 33%")
 
-cor.axis.2 <- sites %>% 
+cor.axis.2 <- way1 %>% 
     select(-Axis.1) %>% 
     pivot_longer(names_to = "param", values_to = "val", -1:-3) %>% 
     split(.$param) %>% 
@@ -466,7 +469,7 @@ cor.axis.2 <- sites %>%
     }) %>% 
     map_df(rbind, .id = "param")
 
-plots$cor.axis.2 <- sites %>% 
+plots$cor.axis.2 <- way1 %>% 
     select(-Axis.1) %>% 
     pivot_longer(names_to = "param", values_to = "val", -1:-3) %>% 
     ggplot(aes(val, Axis.2, color = year)) + 
