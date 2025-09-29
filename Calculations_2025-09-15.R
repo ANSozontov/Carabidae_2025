@@ -10,7 +10,7 @@ theme_set(
         )
 )
 
-path <- dir("data", pattern = "xlsx") %>% 
+path <- dir("Data", pattern = "xlsx") %>% 
     sort(decreasing = TRUE) %>% 
     `[`(1) %>% 
     paste0("data/", .)
