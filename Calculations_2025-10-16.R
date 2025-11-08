@@ -1,6 +1,6 @@
 export <- TRUE
 multip <- 2
-# Data load ---------------------------------------------------------------
+# data load ---------------------------------------------------------------
 library(tidyverse)
 theme_set(
     theme_bw() +
@@ -10,7 +10,7 @@ theme_set(
         )
 )
 
-path <- dir("Data", pattern = "xlsx") %>% 
+path <- dir("data", pattern = "xlsx") %>% 
     sort(decreasing = TRUE) %>% 
     `[`(1) %>% 
     paste0("data/", .)
@@ -74,16 +74,6 @@ res <- list()
 plots <- list()
 tables <- list()
 
-# Numbers in text ---------------------------------------------------------
-tables$t0_text <- div %>% 
-    group_by(site) %>% 
-    summarise(
-        mean_abu = mean(abu), 
-        min_abu  = min(abu), 
-        max_abu  = max(abu),
-        .groups = "drop") %>% 
-    arrange(mean_abu)
-if(!export){tables$t0_text}
 # Models preset ---------------------------------------------------------
 models_fit <- function(x){
     x %>% 
@@ -424,7 +414,7 @@ ggsave(
 # Table 3. Dominant species
 
 # Fig. 4. PCoA ordination
-ggsave(paste0("export/Fig.3_ord_", Sys.Date(), ".pdf"), 
+ggsave(paste0("export/Fig.4_ord_", Sys.Date(), ".pdf"), 
        plot = plots$f4_pcoa,
        width = 18, height = 13, units = "cm")
 
