@@ -3,6 +3,8 @@ Data & code for the article:
 
 [E.A. Belskaya](https://ipae.uran.ru/user/137), [M.P. Zolotarev](https://ipae.uran.ru/user/92), [A.N. Sozontov](https://ipae.uran.ru/Sozontov_AN) // [Environmental Pollution](https://www.sciencedirect.com/science/article/abs/pii/S0269749125017142). 2025. Vol. 388. № 127340. P. 1-10.
 
+<img src="https://raw.githubusercontent.com/ANSozontov/Carabidae_2025/export/main/graphabst.svg">
+
 ## Highlights
 - Carabid diversity and abundance decline under heavy copper smelter pollution.
 - Abundance and diversity of carabids vary nonlinearly along the pollution gradient.
